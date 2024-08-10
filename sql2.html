@@ -68,3 +68,26 @@ mysql> select * from student
 |    3 | raju     |   19 | kgp  |   75.25 |
 +------+----------+------+------+---------+
 3 rows in set (0.00 sec)
+
+mysql> INSERT INTO student(id,name,age)
+    -> values(4,'lokesh',25),
+    -> (5,'teja',25);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from student ;
++------+----------+------+------+---------+
+| id   | name     | age  | loc  | percent |
++------+----------+------+------+---------+
+|    1 | yaswanth |   23 | atp  |   92.25 |
+|    2 | sai      |   22 | dmm  |   78.54 |
+|    3 | raju     |   19 | kgp  |   75.25 |
+|    4 | lokesh   |   25 | NULL |    NULL |
+|    5 | teja     |   25 | NULL |    NULL |
++------+----------+------+------+---------+
+5 rows in set (0.00 sec)
+
+
+mysql> drop table student
+    -> ;
+Query OK, 0 rows affected (0.04 sec)
