@@ -1,0 +1,66 @@
+Microsoft Windows [Version 10.0.22631.3958]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\HP>mysql -uroot -proot
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 8am                |
+| aug10              |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> use aug10;
+Database changed
+mysql> CREATE TABLE employee(
+    -> id int,
+    -> name varchar(32),
+    -> age int,
+    -> loc varchar(32),
+    -> sal float
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc employee;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(32) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| loc   | varchar(32) | YES  |     | NULL    |       |
+| sal   | float       | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> INSERT INTO employee
+    -> values(01,'ravi',23,'bngl',1235),
+    -> (02,'sai',25,'atp',2535.00);
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select *from employee;
++------+------+------+------+------+
+| id   | name | age  | loc  | sal  |
++------+------+------+------+------+
+|    1 | ravi |   23 | bngl | 1235 |
+|    2 | sai  |   25 | atp  | 2535 |
++------+------+------+------+------+
+2 rows in set (0.00 sec)
