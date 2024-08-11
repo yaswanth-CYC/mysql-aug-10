@@ -1,0 +1,109 @@
+Microsoft Windows [Version 10.0.22631.3958]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\HP>mysql -uroot -proot
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 29
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 8am                |
+| aug10              |
+| aug11              |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use aug11
+Database changed
+mysql> CREATE TABLE class1(
+    -> id  int UNIQUE,
+    -> name VARCHAR(32),
+    -> age  int NOT NULL ,
+    -> loc  VARCHAR(32) ,
+    -> percent float CHECK(percent > 60)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO class1
+    ->   VALUES(101,'Rahul',23,'atp',65),
+    ->         (102,'Ravi',22,'dmm',70),
+    ->         (103,'siva',19,'tdp',72);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from class1;
++------+-------+-----+------+---------+
+| id   | name  | age | loc  | percent |
++------+-------+-----+------+---------+
+|  101 | Rahul |  23 | atp  |      65 |
+|  102 | Ravi  |  22 | dmm  |      70 |
+|  103 | siva  |  19 | tdp  |      72 |
++------+-------+-----+------+---------+
+3 rows in set (0.01 sec)
+
+mysql> INSERT INTO class1
+    ->   VALUES(101,'Rahul',23,'atp',56);
+ERROR 3819 (HY000): Check constraint 'class1_chk_1' is violated.
+mysql> INSERT INTO class1
+    ->   VALUES(101,'Rahul',23,'atp',74);
+ERROR 1062 (23000): Duplicate entry '101' for key 'class1.id'
+mysql> INSERT INTO class1
+    ->   VALUES(104,'Rahul',25,'atp',74);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from class1;
++------+-------+-----+------+---------+
+| id   | name  | age | loc  | percent |
++------+-------+-----+------+---------+
+|  101 | Rahul |  23 | atp  |      65 |
+|  102 | Ravi  |  22 | dmm  |      70 |
+|  103 | siva  |  19 | tdp  |      72 |
+|  104 | Rahul |  25 | atp  |      74 |
++------+-------+-----+------+---------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO class1
+    ->   VALUES(105,'suraj',25,'atp',74);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from class1;
++------+-------+-----+------+---------+
+| id   | name  | age | loc  | percent |
++------+-------+-----+------+---------+
+|  101 | Rahul |  23 | atp  |      65 |
+|  102 | Ravi  |  22 | dmm  |      70 |
+|  103 | siva  |  19 | tdp  |      72 |
+|  104 | Rahul |  25 | atp  |      74 |
+|  105 | suraj |  25 | atp  |      74 |
++------+-------+-----+------+---------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO class1(id,name,loc)
+    ->   VALUES(106,'adi','kcd');
+ERROR 1364 (HY000): Field 'age' doesn't have a default value
+mysql> select * from class1;
++------+-------+-----+------+---------+
+| id   | name  | age | loc  | percent |
++------+-------+-----+------+---------+
+|  101 | Rahul |  23 | atp  |      65 |
+|  102 | Ravi  |  22 | dmm  |      70 |
+|  103 | siva  |  19 | tdp  |      72 |
+|  104 | Rahul |  25 | atp  |      74 |
+|  105 | suraj |  25 | atp  |      74 |
++------+-------+-----+------+---------+
+5 rows in set (0.00 sec)
