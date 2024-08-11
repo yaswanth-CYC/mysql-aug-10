@@ -107,3 +107,50 @@ mysql> select * from class1;
 |  105 | suraj |  25 | atp  |      74 |
 +------+-------+-----+------+---------+
 5 rows in set (0.00 sec)
+
+mysql> use aug11
+Database changed
+mysql> CREATE TABLE class2(
+    -> id  int UNIQUE,
+    -> name VARCHAR(32),
+    -> age  int NOT NULL ,
+    -> loc  VARCHAR(32) ,
+    -> percent float CHECK(percent > 60),
+    -> PRIMARY KEY(id,age)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO class2
+    ->   VALUES(201,'Rahul',23,'atp',65),
+    ->         (202,'Ravi',22,'dmm',70),
+    ->         (203,'siva',19,'tdp',72);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from class2;
++-----+-------+-----+------+---------+
+| id  | name  | age | loc  | percent |
++-----+-------+-----+------+---------+
+| 201 | Rahul |  23 | atp  |      65 |
+| 202 | Ravi  |  22 | dmm  |      70 |
+| 203 | siva  |  19 | tdp  |      72 |
++-----+-------+-----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO class2
+    ->   VALUES(201,'Raju',23,'ysr',71);
+ERROR 1062 (23000): Duplicate entry '201-23' for key 'class2.PRIMARY'
+mysql> INSERT INTO class2
+    ->   VALUES(204,'Raju',23,'ysr',71);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from class2;
++-----+-------+-----+------+---------+
+| id  | name  | age | loc  | percent |
++-----+-------+-----+------+---------+
+| 201 | Rahul |  23 | atp  |      65 |
+| 202 | Ravi  |  22 | dmm  |      70 |
+| 203 | siva  |  19 | tdp  |      72 |
+| 204 | Raju  |  23 | ysr  |      71 |
++-----+-------+-----+------+---------+
+4 rows in set (0.00 sec)
