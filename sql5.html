@@ -89,7 +89,6 @@ mysql> INSERT INTO employee(eid,fname,esal,age,loc)
     -> (109,'Alia',95000,35,'Bangalore');
 Query OK, 1 row affected (0.00 sec)
 
-mysql> ^C
 mysql> INSERT INTO employee(eid,fname,age)
     -> VALUES
     -> (110,'Keerthi',25);
@@ -123,10 +122,6 @@ mysql> select eId AS Id, fName AS Name, loc AS location
 +-----+-------+----------+
 2 rows in set (0.01 sec)
 
-mysql> select count(*) as No_of_employees        or( "No of employees")
-    -> FROM employee
-    -> where loc='wayand'
-    -> ^C
 mysql> select count(*) as No_of_employees
     -> FROM employee
     -> where loc='wayand';
@@ -188,17 +183,6 @@ mysql> select * from employee
 2 rows in set (0.00 sec)
 
 mysql> select * from employee
-    -> where fName like 'R%';where lName like '%i';
-+-----+--------+--------+-------+-----+---------+
-| eId | fName  | lName  | eSal  | age | loc     |
-+-----+--------+--------+-------+-----+---------+
-| 101 | rahul  | gandhi | 45000 |  52 | wayand  |
-| 106 | rajini | kanth  | 35000 |  52 | chennai |
-+-----+--------+--------+-------+-----+---------+
-2 rows in set (0.00 sec)
-
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where lName like '%i'' at line 1
-mysql> select * from employee
     -> where fName like 'R%';
 +-----+--------+--------+-------+-----+---------+
 | eId | fName  | lName  | eSal  | age | loc     |
@@ -208,10 +192,6 @@ mysql> select * from employee
 +-----+--------+--------+-------+-----+---------+
 2 rows in set (0.00 sec)
 
-mysql> select * from employee
-    -> where fName like 'R%'
-    -> where lName like '%i';
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where lName like '%i'' at line 3
 mysql> select * from employee
     -> where lName like '%i';
 +-----+--------+------------+-------+-----+--------+
@@ -233,7 +213,6 @@ mysql> select * from employee
 +-----+-------+-------+-------+-----+----------+
 1 row in set (0.00 sec)
 
-mysql> ^C
 mysql> select count(*) from employee
     -> where lName like 'k%h';
 +----------+
@@ -270,9 +249,6 @@ mysql> select * from employee
 +-----+---------+------------+-------+-----+-----------+
 10 rows in set (0.01 sec)
 
-mysql> select * from employee
-    -> ORDER BY fName AESC;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AESC' at line 2
 mysql> select * from employee
     -> ORDER BY fName ASC;
 +-----+---------+------------+-------+-----+-----------+
