@@ -1,0 +1,508 @@
+Microsoft Windows [Version 10.0.22631.4037]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\HP>mysql -uroot -proot
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 8am                |
+| aug10              |
+| aug11              |
+| aug12              |
+| aug13              |
+| aug14              |
+| aug16              |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+10 rows in set (0.10 sec)
+
+mysql> create database aug17;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use aug17;
+Database changed
+
+mysql> CREATE TABLE employee1(
+    -> eId INT,
+    -> fName VARCHAR(32) NOT Null,
+    -> lName VARCHAR(32),
+    -> eSal  INT ,
+    -> age   INT NOT NULL,
+    -> loc   VARCHAR(32)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO employee1
+    -> VALUES
+    -> (102,'Sonia','Gandhi',55000,72,'Wayanad'),
+    -> (103,'Priyanka','Vadra',65000,42,'New Delhi'),
+    -> (104,'Modi','PM',65000,75,'New Delhi'),
+    -> (105,'Amith','Swah',75000,62,'New Delhi'),
+    -> (106,'Rajni','Kanth',25000,75,'Chennai'),
+    -> (107,'Vijay','Sethupathi',35000,72,'Chennai'),
+    -> (108,'Anushka','Setty',15000,32,'Bangalore');
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO employee1
+    -> VALUES
+    -> (101,'Rahul','Gandhi',45000,52,'Wayanad');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO employee1(eid,fname,esal,age,loc)
+    -> VALUES
+    -> (109,'Alia',95000,35,'Bangalore');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO employee1(eid,fname,age)
+    -> VALUES
+    -> (110,'Keerthi',25);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from employee1;
++------+----------+------------+-------+-----+-----------+
+| eId  | fName    | lName      | eSal  | age | loc       |
++------+----------+------------+-------+-----+-----------+
+|  102 | Sonia    | Gandhi     | 55000 |  72 | Wayanad   |
+|  103 | Priyanka | Vadra      | 65000 |  42 | New Delhi |
+|  104 | Modi     | PM         | 65000 |  75 | New Delhi |
+|  105 | Amith    | Swah       | 75000 |  62 | New Delhi |
+|  106 | Rajni    | Kanth      | 25000 |  75 | Chennai   |
+|  107 | Vijay    | Sethupathi | 35000 |  72 | Chennai   |
+|  108 | Anushka  | Setty      | 15000 |  32 | Bangalore |
+|  101 | Rahul    | Gandhi     | 45000 |  52 | Wayanad   |
+|  109 | Alia     | NULL       | 95000 |  35 | Bangalore |
+|  110 | Keerthi  | NULL       |  NULL |  25 | NULL      |
++------+----------+------------+-------+-----+-----------+
+10 rows in set (0.01 sec)
+
+mysql> alter table employee1;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter table employee1
+    -> add primary key (eId);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> savepoint sp1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> truncate employee1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select *from employee1;
+Empty set (0.00 sec)
+
+mysql> rollback to sp1;
+ERROR 1305 (42000): SAVEPOINT sp1 does not exist
+
+mysql> select *from employee1;
+Empty set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 8am                |
+| aug10              |
+| aug11              |
+| aug12              |
+| aug13              |
+| aug14              |
+| aug16              |
+| aug17              |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> show tables
+    -> ;
++-----------------+
+| Tables_in_aug17 |
++-----------------+
+| employee1       |
++-----------------+
+1 row in set (0.03 sec)
+
+mysql> drop table employee1;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE employee1(
+    -> eId INT,
+    -> fName VARCHAR(32) NOT Null,
+    -> lName VARCHAR(32),
+    -> eSal  INT ,
+    -> age   INT NOT NULL,
+    -> loc   VARCHAR(32),
+    -> primary key (eId)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO employee1
+    -> VALUES
+    -> (102,'Sonia','Gandhi',55000,72,'Wayanad'),
+    -> (103,'Priyanka','Vadra',65000,42,'New Delhi'),
+    -> (104,'Modi','PM',65000,75,'New Delhi'),
+    -> (105,'Amith','Swah',75000,62,'New Delhi'),
+    -> (106,'Rajni','Kanth',25000,75,'Chennai'),
+    -> (107,'Vijay','Sethupathi',35000,72,'Chennai'),
+    -> (108,'Anushka','Setty',15000,32,'Bangalore');
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql> INSERT INTO employee1
+    -> VALUES
+    -> (101,'Rahul','Gandhi',45000,52,'Wayanad');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO employee1(eid,fname,esal,age,loc)
+    -> VALUES
+    -> (109,'Alia',95000,35,'Bangalore');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO employee1(eid,fname,age)
+    -> VALUES
+    -> (110,'Keerthi',25);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * FROM employee1;
++-----+----------+------------+-------+-----+-----------+
+| eId | fName    | lName      | eSal  | age | loc       |
++-----+----------+------------+-------+-----+-----------+
+| 101 | Rahul    | Gandhi     | 45000 |  52 | Wayanad   |
+| 102 | Sonia    | Gandhi     | 55000 |  72 | Wayanad   |
+| 103 | Priyanka | Vadra      | 65000 |  42 | New Delhi |
+| 104 | Modi     | PM         | 65000 |  75 | New Delhi |
+| 105 | Amith    | Swah       | 75000 |  62 | New Delhi |
+| 106 | Rajni    | Kanth      | 25000 |  75 | Chennai   |
+| 107 | Vijay    | Sethupathi | 35000 |  72 | Chennai   |
+| 108 | Anushka  | Setty      | 15000 |  32 | Bangalore |
+| 109 | Alia     | NULL       | 95000 |  35 | Bangalore |
+| 110 | Keerthi  | NULL       |  NULL |  25 | NULL      |
++-----+----------+------------+-------+-----+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select & from employee1
+    -> where loc="wayanad;
+    "> ^C
+mysql>
+mysql> select & from employee1
+    -> where loc="wayanad";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '& from employee1
+where loc="wayanad"' at line 1
+mysql> select loc as Location , count(eId) as "no of employees"
+    -> from employee1
+    -> group by loc;
++-----------+-----------------+
+| Location  | no of employees |
++-----------+-----------------+
+| Wayanad   |               2 |
+| New Delhi |               3 |
+| Chennai   |               2 |
+| Bangalore |               2 |
+| NULL      |               1 |
++-----------+-----------------+
+5 rows in set (0.01 sec)
+
+mysql> select loc as Location , sum(eSal) as "Total Amount"
+    -> from employee1
+    -> group by loc;
++-----------+--------------+
+| Location  | Total Amount |
++-----------+--------------+
+| Wayanad   |       100000 |
+| New Delhi |       205000 |
+| Chennai   |        60000 |
+| Bangalore |       110000 |
+| NULL      |         NULL |
++-----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select loc as Location, sum(esal) as "Total Amount", count(eid) a
+    -> s "No of Employee"
+    ->     -> from employee
+    ->     -> group by loc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 's "No of Employee"
+    -> from employee
+    -> group by loc' at line 2
+mysql> select loc as Location, sum(esal) as "Total Amount", count(eid) a
+    -> s "No of Employee"
+    -> ^C
+mysql>
+mysql> select loc as Location, sum(eSal) as "Total Amount", count(eId) as "No of Employee"
+    -> ^C
+mysql> select loc as Location, sum(eSal) as "Total Amount", count(eId) as "No of Employee"
+    -> from employee1
+    -> group by loc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' by loc' at line 3
+mysql> select loc as Location, sum(eSal) as "Total Amount", count(eId) as "No of Employee"
+    -> from employee1
+    -> group by loc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' by loc' at line 3
+mysql> select loc as Location, sum(eSal) as "Total Amount", count(eId) as "No of Employee"
+    -> from employee1
+    -> group by loc;
++-----------+--------------+----------------+
+| Location  | Total Amount | No of Employee |
++-----------+--------------+----------------+
+| Wayanad   |       100000 |              2 |
+| New Delhi |       205000 |              3 |
+| Chennai   |        60000 |              2 |
+| Bangalore |       110000 |              2 |
+| NULL      |         NULL |              1 |
++-----------+--------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_aug17 |
++-----------------+
+| employee1       |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> drop table employee1;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table Dept(
+    -> Dept_Id int,
+    -> Dept_Name varchar(32) NOT NULL,
+    -> Dept_Location varchar(32) NOT NULL(32),
+    -> Dept_Email varchar(32) NOTNULL,
+    -> primary key (Dept_Id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(32),
+Dept_Email varchar(32) NOTNULL,
+primary key (Dept_Id)
+)' at line 4
+mysql> create table Dept(
+    -> Dept_Id int,
+    -> Dept_Name varchar(32) NOT NULL,
+    -> Dept_Location varchar(32) NOT NULL,
+    -> Dept_Email varchar(32) NOTNULL,
+    -> primary key (Dept_Id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NOTNULL,
+primary key (Dept_Id)
+)' at line 5
+mysql> create table Dept(
+    -> Dept_Id int,
+    -> Dept_Name varchar(32) ,
+    -> Dept_Location varchar(32) ,
+    -> Dept_Email varchar(32),
+    -> primary key (Dept_Id)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO Dept
+    -> values
+    -> (1,'HR','Banglore','hr@gmail.com'),
+    -> (2,'IT','Chennai','it@gmail.com'),
+    -> (3,'SALES','Mumbai','hr@gmail.com')
+    -> ;
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> select *from Dept;
++---------+-----------+---------------+--------------+
+| Dept_Id | Dept_Name | Dept_Location | Dept_Email   |
++---------+-----------+---------------+--------------+
+|       1 | HR        | Banglore      | hr@gmail.com |
+|       2 | IT        | Chennai       | it@gmail.com |
+|       3 | SALES     | Mumbai        | hr@gmail.com |
++---------+-----------+---------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE employee(
+    -> eId int,
+    -> eName VARCHAR(32),
+    -> eSal float,
+    -> dept_Id int,
+    -> age INT CHECK (age>18),
+    -> PRIMARY KEY (eId),
+    -> FOREIGN KEY (dept_Id) REFERENCES Dept(dept_Id)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> drop table employee;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE employee(
+    -> eId int,
+    -> eName VARCHAR(32),
+    -> eSal float,
+    -> dept_Id int,
+    -> age INT CHECK (age>18),
+    -> PRIMARY KEY (eId),
+    -> FOREIGN KEY (dept_Id) REFERENCES Dept(Dept_Id)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO employee
+    -> VALUES
+    -> (101,"Rahul",45000.45,1,52),
+    -> (102,"Sonia",45000.45,1,72),
+    -> (103,"Priyanka",45000.45,1,42),
+    -> (104,"Modi",55000.45,2,62),
+    -> (105,"Amith",55000.45,2,62),
+    -> (106,"Rajni",55000.45,3,62),
+    -> (107,"VS",65000.45,3,42),
+    -> (108,"Vijay",65000.45,3,42),
+    -> (109,"Sharuk",65000.45,3,52),
+    -> (110,"Salman",15000.45,3,55),
+    -> (111,"Alia",15000.45,3,32),
+    -> (112,"Keerti",15000.45,3,27);
+Query OK, 12 rows affected (0.02 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++-----------------+
+| Tables_in_aug17 |
++-----------------+
+| dept            |
+| employee        |
++-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+----------+---------+---------+------+
+| eId | eName    | eSal    | dept_Id | age  |
++-----+----------+---------+---------+------+
+| 101 | Rahul    | 45000.4 |       1 |   52 |
+| 102 | Sonia    | 45000.4 |       1 |   72 |
+| 103 | Priyanka | 45000.4 |       1 |   42 |
+| 104 | Modi     | 55000.4 |       2 |   62 |
+| 105 | Amith    | 55000.4 |       2 |   62 |
+| 106 | Rajni    | 55000.4 |       3 |   62 |
+| 107 | VS       | 65000.4 |       3 |   42 |
+| 108 | Vijay    | 65000.4 |       3 |   42 |
+| 109 | Sharuk   | 65000.4 |       3 |   52 |
+| 110 | Salman   | 15000.5 |       3 |   55 |
+| 111 | Alia     | 15000.5 |       3 |   32 |
+| 112 | Keerti   | 15000.5 |       3 |   27 |
++-----+----------+---------+---------+------+
+12 rows in set (0.00 sec)
+
+mysql> show tables:
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':' at line 1
+mysql> show tables;
++-----------------+
+| Tables_in_aug17 |
++-----------------+
+| dept            |
+| employee        |
++-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee, dept where employee.dept_Id=Dept_Id;
+ERROR 1052 (23000): Column 'Dept_Id' in where clause is ambiguous
+mysql> select * from employee, dept where employee.dept_Id=Dept.Dept_Id;
++-----+----------+---------+---------+------+---------+-----------+---------------+--------------+
+| eId | eName    | eSal    | dept_Id | age  | Dept_Id | Dept_Name | Dept_Location | Dept_Email   |
++-----+----------+---------+---------+------+---------+-----------+---------------+--------------+
+| 101 | Rahul    | 45000.4 |       1 |   52 |       1 | HR        | Banglore      | hr@gmail.com |
+| 102 | Sonia    | 45000.4 |       1 |   72 |       1 | HR        | Banglore      | hr@gmail.com |
+| 103 | Priyanka | 45000.4 |       1 |   42 |       1 | HR        | Banglore      | hr@gmail.com |
+| 104 | Modi     | 55000.4 |       2 |   62 |       2 | IT        | Chennai       | it@gmail.com |
+| 105 | Amith    | 55000.4 |       2 |   62 |       2 | IT        | Chennai       | it@gmail.com |
+| 106 | Rajni    | 55000.4 |       3 |   62 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 107 | VS       | 65000.4 |       3 |   42 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 108 | Vijay    | 65000.4 |       3 |   42 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 109 | Sharuk   | 65000.4 |       3 |   52 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 110 | Salman   | 15000.5 |       3 |   55 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 111 | Alia     | 15000.5 |       3 |   32 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 112 | Keerti   | 15000.5 |       3 |   27 |       3 | SALES     | Mumbai        | hr@gmail.com |
++-----+----------+---------+---------+------+---------+-----------+---------------+--------------+
+12 rows in set (0.00 sec)
+
+mysql> select eName, Name
+    -> from employee,dept  where employee.dept_Id=Dept.Dept_Id;
+ERROR 1054 (42S22): Unknown column 'Name' in 'field list'
+mysql> from employee,dept  where employee.dept_Id=Dept.Dept_Id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employee,dept  where employee.dept_Id=Dept.Dept_Id' at line 1
+mysql> select eName, Name
+    -> from employee,Dept  where employee.dept_Id=Dept.Dept_Id;
+ERROR 1054 (42S22): Unknown column 'Name' in 'field list'
+mysql> select eName, Dept_Name
+    -> from employee,Dept  where employee.dept_Id=Dept.Dept_Id;
++----------+-----------+
+| eName    | Dept_Name |
++----------+-----------+
+| Rahul    | HR        |
+| Sonia    | HR        |
+| Priyanka | HR        |
+| Modi     | IT        |
+| Amith    | IT        |
+| Rajni    | SALES     |
+| VS       | SALES     |
+| Vijay    | SALES     |
+| Sharuk   | SALES     |
+| Salman   | SALES     |
+| Alia     | SALES     |
+| Keerti   | SALES     |
++----------+-----------+
+12 rows in set (0.00 sec)
+
+mysql> select 8
+    -> ^C
+mysql> select *
+    -> from employee e,Dept d
+    -> where e.dept_Id=d.Dept_id;
++-----+----------+---------+---------+------+---------+-----------+---------------+--------------+
+| eId | eName    | eSal    | dept_Id | age  | Dept_Id | Dept_Name | Dept_Location | Dept_Email   |
++-----+----------+---------+---------+------+---------+-----------+---------------+--------------+
+| 101 | Rahul    | 45000.4 |       1 |   52 |       1 | HR        | Banglore      | hr@gmail.com |
+| 102 | Sonia    | 45000.4 |       1 |   72 |       1 | HR        | Banglore      | hr@gmail.com |
+| 103 | Priyanka | 45000.4 |       1 |   42 |       1 | HR        | Banglore      | hr@gmail.com |
+| 104 | Modi     | 55000.4 |       2 |   62 |       2 | IT        | Chennai       | it@gmail.com |
+| 105 | Amith    | 55000.4 |       2 |   62 |       2 | IT        | Chennai       | it@gmail.com |
+| 106 | Rajni    | 55000.4 |       3 |   62 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 107 | VS       | 65000.4 |       3 |   42 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 108 | Vijay    | 65000.4 |       3 |   42 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 109 | Sharuk   | 65000.4 |       3 |   52 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 110 | Salman   | 15000.5 |       3 |   55 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 111 | Alia     | 15000.5 |       3 |   32 |       3 | SALES     | Mumbai        | hr@gmail.com |
+| 112 | Keerti   | 15000.5 |       3 |   27 |       3 | SALES     | Mumbai        | hr@gmail.com |
++-----+----------+---------+---------+------+---------+-----------+---------------+--------------+
+12 rows in set (0.00 sec)
+
+mysql> select e.eName, d.Dept_Name,d.Dept_Location
+    -> from employee e,Dept d,
+    -> where e.dept_id=d.Dept_Id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where e.dept_id=d.Dept_Id' at line 3
+mysql>
+mysql> select e.eName, d.Dept_Name,d.Dept_Location
+    -> from employee e,Dept d
+    -> where e.dept_id=d.Dept_Id;
++----------+-----------+---------------+
+| eName    | Dept_Name | Dept_Location |
++----------+-----------+---------------+
+| Rahul    | HR        | Banglore      |
+| Sonia    | HR        | Banglore      |
+| Priyanka | HR        | Banglore      |
+| Modi     | IT        | Chennai       |
+| Amith    | IT        | Chennai       |
+| Rajni    | SALES     | Mumbai        |
+| VS       | SALES     | Mumbai        |
+| Vijay    | SALES     | Mumbai        |
+| Sharuk   | SALES     | Mumbai        |
+| Salman   | SALES     | Mumbai        |
+| Alia     | SALES     | Mumbai        |
+| Keerti   | SALES     | Mumbai        |
++----------+-----------+---------------+
+12 rows in set (0.00 sec)
